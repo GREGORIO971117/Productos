@@ -1,21 +1,25 @@
 const main=document.getElementsByTagName("main").item(0);
 const URLMain="https://fakestoreapi.com/products/";
+const UlMenu=document.getElementById("ulMenu");
 
-function getData() {
-    fetch(URLMain)
+function getData(elemento) {
+  const options={"method":"GET"};
+
+  fetch(URLMain+elemento,options)
 .then((response)=>{
     response.json().then((res)=>{
         crearCard(res);
     });
  })
  .catch((err)=>{
-    main.insertAdjacentHTML("beforeend",
+    main.insertAdjacentHTML("afterbegin",
         `<div class="error">Error: ${err.message}</div>`);
     
  });
 }
 
 function crearCard(res) {
+    main.innerHTML="";
     res.forEach((element)=>{
         main.insertAdjacentHTML("afterbegin",
 
@@ -32,6 +36,23 @@ function crearCard(res) {
     });
 }
 
+function getCategories() {
+  const options={"method":"GET"};
+  fetch(URLMain+"categories/",options)
+.then((response)=>{
+  response.json().then((res)=>{
+    res.forEach((element)=>{
+      UlMenu.insertAdjacentHTML("afterbegin",
+      `<li><a class="dropdown-item" onclick="getData('category/${element}')">${element}</a></li>`);
+    });
+  });
+})
+.catch((err)=>{
+  main.insertAdjacentHTML("beforeend",
+      `<div class="error">Error: ${err.message}</div>`);
+  
+});
+}
 
-
-getData();
+getCategories();
+getData("");

@@ -7,8 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="btn-group">
+        <button type="button" class="btn btn-warning">Categorias </button>
+        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" id="ulMenu">
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" onclick="getData('')">Todas</a></li>
+        </ul>
+      </div><!--btn-group-->
+
     <main style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        
         <h1>Productos</h1>
         <div class="container">
 
